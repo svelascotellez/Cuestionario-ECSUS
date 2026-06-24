@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 
 const initialState = {
   error: '',
-  success: false
 }
 
 export default function CuestionarioPage() {
