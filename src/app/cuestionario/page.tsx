@@ -5,8 +5,7 @@ import { submitQuestionnaire } from '@/app/actions'
 import { useRouter } from 'next/navigation'
 
 const initialState = {
-  error: '',
-  success: false
+  error: ''
 }
 
 export default function CuestionarioPage() {
