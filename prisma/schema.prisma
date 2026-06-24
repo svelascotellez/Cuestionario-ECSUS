@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String          @id @default(uuid())
+  username       String          @unique
+  passwordHash   String
+  role           String          @default("USER") // "ADMIN" or "USER"
+  questionnaires Questionnaire[]
+  auditLogs      AuditLog[]
+  createdAt      DateTime        @default(now())
+}
+
+model Questionnaire {
+  id                String   @id @default(uuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id])
+  createdAt         DateTime @default(now()) // We will store it as UTC but display it in CDMX
+  location          String
+  unitNumber        String?
+  // Questionnaire responses
+  q1_techIssue      String   // Using string to store multiple answers (comma separated or JSON)
+  q2_accessIssue    String   // "Sí" or "No"
+  q3_powerIssue     String   // "No", "1 a 4 horas", etc.
+  q4_trainingNeeded String   // "Sí" or "No"
+  q5_comments       String?  
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  action    String
+  details   String?
+  timestamp DateTime @default(now())
+}
