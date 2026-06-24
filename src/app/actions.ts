@@ -150,3 +150,78 @@ export async function deleteQuestionnaireAction(id: string) {
     throw new Error('No se pudo eliminar el registro')
   }
 }
+
+export async function updateUserAction(prevState: any, formData: FormData) {
+  const session = await getSession()
+  if (!session || session.role !== 'ADMIN') {
+    return { error: 'No tienes permisos para modificar usuarios' }
+  }
+
+  const id = formData.get('id') as string
+  const role = formData.get('role') as string
+  const password = formData.get('password') as string
+
+  if (!id) {
+    return { error: 'ID de usuario requerido' }
+  }
+
+  try {
+    const updateData: any = {}
+    if (role) updateData.role = role
+    if (password) {
+      updateData.passwordHash = await bcrypt.hash(password, 10)
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id },
+      data: updateData
+    })
+
+    await prisma.auditLog.create({
+      data: {
+        userId: session.id,
+        action: 'UPDATE_USER',
+        details: `Usuario modificado: ${updatedUser.username}`
+      }
+    })
+
+    revalidatePath('/admin/usuarios')
+    return { success: true }
+  } catch (err) {
+    console.error(err)
+    return { error: 'Error al modificar el usuario' }
+  }
+}
+
+export async function deleteUserAction(id: string) {
+  const session = await getSession()
+  if (!session || session.role !== 'ADMIN') {
+    throw new Error('No tienes permisos')
+  }
+
+  try {
+    const user = await prisma.user.findUnique({ where: { id } })
+    if (user?.username === 'admin') {
+      throw new Error('No se puede eliminar el usuario administrador principal')
+    }
+
+    await prisma.user.delete({
+      where: { id }
+    })
+
+    await prisma.auditLog.create({
+      data: {
+        userId: session.id,
+        action: 'DELETE_USER',
+        details: `Usuario eliminado con ID: ${id}`
+      }
+    })
+
+    revalidatePath('/admin/usuarios')
+  } catch (err: any) {
+    console.error('Error deleting user', err)
+    throw new Error(err.message || 'No se pudo eliminar el usuario')
+  }
+}
+
+ 

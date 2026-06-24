@@ -1,5 +1,6 @@
 import prisma from '@/lib/db'
 import CreateUserForm from '@/components/CreateUserForm'
+import UserRowActions from '@/components/UserRowActions'
 
 export const dynamic = 'force-dynamic'
 
@@ -29,6 +30,7 @@ export default async function UsuariosPage() {
                   <th style={{ padding: '1rem' }}>Usuario</th>
                   <th style={{ padding: '1rem' }}>Rol</th>
                   <th style={{ padding: '1rem' }}>Fecha Registro (CDMX)</th>
+                  <th style={{ padding: '1rem' }}>Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -39,6 +41,7 @@ export default async function UsuariosPage() {
                     <td style={{ padding: '1rem' }}>
                       {new Date(user.createdAt).toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })}
                     </td>
+                    <UserRowActions user={user} />
                   </tr>
                 ))}
               </tbody>

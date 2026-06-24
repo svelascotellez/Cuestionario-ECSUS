@@ -23,7 +23,7 @@ model User {
 model Questionnaire {
   id                String   @id @default(uuid())
   userId            String
-  user              User     @relation(fields: [userId], references: [id])
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt         DateTime @default(now()) // We will store it as UTC but display it in CDMX
   location          String
   unitNumber        String?
@@ -38,7 +38,7 @@ model Questionnaire {
 model AuditLog {
   id        String   @id @default(uuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   action    String
   details   String?
   timestamp DateTime @default(now())
