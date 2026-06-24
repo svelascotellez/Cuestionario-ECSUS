@@ -68,22 +68,48 @@ export default function CuestionarioPage() {
           </div>
           
           <div className="form-group">
-            <label className="form-label">1. ¿Tiene alguna situación técnica ya sea con el equipo de cómputo o Internet?</label>
-            <div className="checkbox-group">
-              <input type="checkbox" id="q1_no" name="q1" value="No" />
-              <label htmlFor="q1_no">No</label>
+            <label className="form-label">1. ¿Tiene alguna situación técnica con:</label>
+            
+            <div style={{ marginLeft: '0.5rem', marginBottom: '1rem' }}>
+              <span style={{ fontWeight: 500, display: 'block', marginBottom: '0.35rem' }}>a) Equipo de cómputo</span>
+              <div style={{ display: 'flex', gap: '1.5rem' }}>
+                <div className="checkbox-group" style={{ margin: 0 }}>
+                  <input type="radio" id="q1_equipo_si" name="q1_equipo" value="Sí" required />
+                  <label htmlFor="q1_equipo_si">Sí</label>
+                </div>
+                <div className="checkbox-group" style={{ margin: 0 }}>
+                  <input type="radio" id="q1_equipo_no" name="q1_equipo" value="No" defaultChecked />
+                  <label htmlFor="q1_equipo_no">No</label>
+                </div>
+              </div>
             </div>
-            <div className="checkbox-group">
-              <input type="checkbox" id="q1_equipo" name="q1" value="Equipo de cómputo" />
-              <label htmlFor="q1_equipo">Equipo de cómputo</label>
+
+            <div style={{ marginLeft: '0.5rem', marginBottom: '1rem' }}>
+              <span style={{ fontWeight: 500, display: 'block', marginBottom: '0.35rem' }}>b) Internet</span>
+              <div style={{ display: 'flex', gap: '1.5rem' }}>
+                <div className="checkbox-group" style={{ margin: 0 }}>
+                  <input type="radio" id="q1_internet_si" name="q1_internet" value="Sí" required />
+                  <label htmlFor="q1_internet_si">Sí</label>
+                </div>
+                <div className="checkbox-group" style={{ margin: 0 }}>
+                  <input type="radio" id="q1_internet_no" name="q1_internet" value="No" defaultChecked />
+                  <label htmlFor="q1_internet_no">No</label>
+                </div>
+              </div>
             </div>
-            <div className="checkbox-group">
-              <input type="checkbox" id="q1_internet" name="q1" value="Internet" />
-              <label htmlFor="q1_internet">Internet</label>
-            </div>
-            <div className="checkbox-group">
-              <input type="checkbox" id="q1_impresora" name="q1" value="Impresora" />
-              <label htmlFor="q1_impresora">Impresora</label>
+
+            <div style={{ marginLeft: '0.5rem', marginBottom: '0.5rem' }}>
+              <span style={{ fontWeight: 500, display: 'block', marginBottom: '0.35rem' }}>c) Impresora</span>
+              <div style={{ display: 'flex', gap: '1.5rem' }}>
+                <div className="checkbox-group" style={{ margin: 0 }}>
+                  <input type="radio" id="q1_impresora_si" name="q1_impresora" value="Sí" required />
+                  <label htmlFor="q1_impresora_si">Sí</label>
+                </div>
+                <div className="checkbox-group" style={{ margin: 0 }}>
+                  <input type="radio" id="q1_impresora_no" name="q1_impresora" value="No" defaultChecked />
+                  <label htmlFor="q1_impresora_no">No</label>
+                </div>
+              </div>
             </div>
           </div>
 

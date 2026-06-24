@@ -48,16 +48,20 @@ export async function submitQuestionnaire(prevState: any, formData: FormData) {
   }
 
   const unitNumber = formData.get('unitNumber') as string
-  const q1 = formData.getAll('q1').join(', ')
+  const q1_equipo = formData.get('q1_equipo') as string
+  const q1_internet = formData.get('q1_internet') as string
+  const q1_impresora = formData.get('q1_impresora') as string
   const q2 = formData.get('q2') as string
   const q3 = formData.get('q3') as string
   const q4 = formData.get('q4') as string
   const q5 = formData.get('q5') as string
   const location = formData.get('location') as string || 'Desconocido'
 
-  if (!unitNumber || !q2 || !q3 || !q4) {
+  if (!unitNumber || !q1_equipo || !q1_internet || !q1_impresora || !q2 || !q3 || !q4) {
     return { error: 'Por favor completa todas las preguntas obligatorias' }
   }
+
+  const q1 = `Equipo: ${q1_equipo}, Internet: ${q1_internet}, Impresora: ${q1_impresora}`
 
   try {
     const questionnaire = await prisma.questionnaire.create({
