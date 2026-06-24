@@ -3,6 +3,7 @@
 import prisma from '@/lib/db'
 import { login as loginAuth, logout as logoutAuth, getSession } from '@/lib/auth'
 import bcrypt from 'bcryptjs'
+import { getReverseGeocoding } from '@/lib/utils'
 import { redirect } from 'next/navigation'
 
 export async function logoutAction() {
@@ -55,10 +56,22 @@ export async function submitQuestionnaire(prevState: any, formData: FormData) {
   const q3 = formData.get('q3') as string
   const q4 = formData.get('q4') as string
   const q5 = formData.get('q5') as string
-  const location = formData.get('location') as string || 'Desconocido'
+  const locationRaw = formData.get('location') as string || 'Desconocido'
 
   if (!unitNumber || !q1_equipo || !q1_internet || !q1_impresora || !q2 || !q3 || !q4) {
     return { error: 'Por favor completa todas las preguntas obligatorias' }
+  }
+
+  let location = locationRaw
+  const coordsRegex = /^(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)$/
+  const match = locationRaw.trim().match(coordsRegex)
+  if (match) {
+    const lat = parseFloat(match[1])
+    const lon = parseFloat(match[3])
+    const address = await getReverseGeocoding(lat, lon)
+    if (address) {
+      location = `${locationRaw} (${address})`
+    }
   }
 
   const q1 = `Equipo: ${q1_equipo}, Internet: ${q1_internet}, Impresora: ${q1_impresora}`

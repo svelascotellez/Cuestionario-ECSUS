@@ -38,3 +38,20 @@ export function parseTechIssues(q1_techIssue: string) {
 
   return { equipo, internet, impresora }
 }
+
+export async function getReverseGeocoding(lat: number, lon: number): Promise<string> {
+  try {
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Cuestionario-ECSUS-App/1.0'
+      }
+    })
+    if (!response.ok) return ''
+    const data = await response.json()
+    return data.display_name || ''
+  } catch (error) {
+    console.error('Error in reverse geocoding:', error)
+    return ''
+  }
+}
