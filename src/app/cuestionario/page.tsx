@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useState } from 'react'
 import { submitQuestionnaire } from '@/app/actions'
 import { useRouter } from 'next/navigation'
+import LogoutButton from '@/components/LogoutButton'
 
 const initialState = {
   error: ''
@@ -40,7 +41,10 @@ export default function CuestionarioPage() {
   return (
     <div className="container">
       <div className="card" style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <h2 className="mb-4">Cuestionario ECSUS</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+          <h2 style={{ margin: 0 }}>Cuestionario ECSUS</h2>
+          <LogoutButton />
+        </div>
         <div style={{ backgroundColor: '#F8F9FA', borderLeft: '4px solid var(--accent-color)', padding: '1rem', marginBottom: '2rem', borderRadius: '4px' }}>
           <p style={{ margin: 0, fontWeight: 500 }}>
             Agradecemos su atención para esta llamada, formamos parte del equipo de despliegue de ECSUS. El objetivo de esta llamada es ver si podemos apoyarle en algún tema, ya que vemos que la productividad de esta Unidad está por debajo del promedio que se manejaba SISPA.

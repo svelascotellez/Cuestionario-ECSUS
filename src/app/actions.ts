@@ -1,9 +1,14 @@
 'use server'
 
 import prisma from '@/lib/db'
-import { login as loginAuth, getSession } from '@/lib/auth'
+import { login as loginAuth, logout as logoutAuth, getSession } from '@/lib/auth'
 import bcrypt from 'bcryptjs'
 import { redirect } from 'next/navigation'
+
+export async function logoutAction() {
+  await logoutAuth()
+  redirect('/login')
+}
 
 export async function loginAction(prevState: any, formData: FormData) {
   const username = formData.get('username') as string
