@@ -1,6 +1,8 @@
 import prisma from '@/lib/db'
 import DashboardCharts from '@/components/DashboardCharts'
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminDashboard() {
   const totalQuestionnaires = await prisma.questionnaire.count()
   

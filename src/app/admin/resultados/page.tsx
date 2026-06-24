@@ -1,5 +1,7 @@
 import prisma from '@/lib/db'
 import ExportExcelButton from '@/components/ExportExcelButton'
+
+export const dynamic = 'force-dynamic'
 import { deleteQuestionnaireAction } from '@/app/actions'
 
 export default async function ResultadosPage() {
