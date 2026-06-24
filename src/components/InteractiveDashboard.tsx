@@ -96,6 +96,17 @@ export default function InteractiveDashboard({ initialResults }: InteractiveDash
     })
   }, [initialResults, searchTerm, selectedUser, startDate, endDate, techIssueFilter])
 
+  // Get unique units count
+  const uniqueUnitsCount = useMemo(() => {
+    const units = new Set<string>()
+    filteredResults.forEach((item: any) => {
+      if (item.unitNumber) {
+        units.add(item.unitNumber.trim().toLowerCase())
+      }
+    })
+    return units.size
+  }, [filteredResults])
+
   // Clean filters
   const resetFilters = () => {
     setSearchTerm('')
@@ -357,6 +368,37 @@ export default function InteractiveDashboard({ initialResults }: InteractiveDash
           >
             Limpiar Filtros
           </button>
+        </div>
+      </div>
+
+      {/* KPI Cards Section */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+        <div className="card text-center" style={{ padding: '1.2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h5 style={{ margin: '0 0 0.5rem 0', color: 'var(--text-muted)', fontSize: '0.9rem' }}>Total Cuestionarios</h5>
+          <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0, color: 'var(--accent-color)' }}>
+            {filteredResults.length}
+          </p>
+        </div>
+        <div className="card text-center" style={{ padding: '1.2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h5 style={{ margin: '0 0 0.5rem 0', color: 'var(--text-muted)', fontSize: '0.9rem' }}>Unidades Supervisadas</h5>
+          <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0, color: 'var(--primary-color)' }}>
+            {uniqueUnitsCount}
+          </p>
+        </div>
+        <div className="card text-center" style={{ padding: '1.2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h5 style={{ margin: '0 0 0.5rem 0', color: 'var(--text-muted)', fontSize: '0.9rem' }}>Con Fallas Técnicas</h5>
+          <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0, color: 'rgba(239, 68, 68, 1)' }}>
+            {filteredResults.filter((item: any) => {
+              const parsed = parseTechIssues(item.q1_techIssue)
+              return parsed.equipo === 'Sí' || parsed.internet === 'Sí' || parsed.impresora === 'Sí'
+            }).length}
+          </p>
+        </div>
+        <div className="card text-center" style={{ padding: '1.2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h5 style={{ margin: '0 0 0.5rem 0', color: 'var(--text-muted)', fontSize: '0.9rem' }}>Problemas de Acceso</h5>
+          <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0, color: 'rgba(245, 158, 11, 1)' }}>
+            {stats.q2.si}
+          </p>
         </div>
       </div>
 
