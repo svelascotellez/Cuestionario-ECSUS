@@ -30,6 +30,9 @@ export default async function ResultadosPage() {
               <th style={{ padding: '1rem' }}>Ubicación</th>
               <th style={{ padding: '1rem' }}>S. Técnica</th>
               <th style={{ padding: '1rem' }}>Problemas Acceso</th>
+              <th style={{ padding: '1rem' }}>Suministro Energía</th>
+              <th style={{ padding: '1rem' }}>Capacitación</th>
+              <th style={{ padding: '1rem' }}>Comentarios</th>
               <th style={{ padding: '1rem' }}>Acciones</th>
             </tr>
           </thead>
@@ -44,6 +47,9 @@ export default async function ResultadosPage() {
                 <td style={{ padding: '1rem' }}>{item.location}</td>
                 <td style={{ padding: '1rem' }}>{item.q1_techIssue}</td>
                 <td style={{ padding: '1rem' }}>{item.q2_accessIssue}</td>
+                <td style={{ padding: '1rem' }}>{item.q3_powerIssue}</td>
+                <td style={{ padding: '1rem' }}>{item.q4_trainingNeeded}</td>
+                <td style={{ padding: '1rem', whiteSpace: 'pre-wrap', maxWidth: '250px' }}>{item.q5_comments || 'N/A'}</td>
                 <td style={{ padding: '1rem' }}>
                   <form action={async () => {
                     'use server'
@@ -58,7 +64,7 @@ export default async function ResultadosPage() {
             ))}
             {results.length === 0 && (
               <tr>
-                <td colSpan={7} style={{ padding: '2rem', textAlign: 'center' }}>No hay resultados aún.</td>
+                <td colSpan={10} style={{ padding: '2rem', textAlign: 'center' }}>No hay resultados aún.</td>
               </tr>
             )}
           </tbody>
