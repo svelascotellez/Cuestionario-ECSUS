@@ -88,12 +88,15 @@ El sistema consta de 3 tablas principales en SQLite:
    - La pregunta técnica ahora exige una respuesta explícita (Sí/No) para cada opción (Equipo de cómputo, Internet e Impresora), optimizando la precisión de los reportes.
    - Cuenta con "No" seleccionado por defecto para agilizar la captura de datos.
 
-3. **Panel Administrativo (Dashboard):**
+3. **Panel Administrativo con Menú Colapsable:**
    - Gráficas estadísticas automáticas de frecuencia de problemas de acceso, suministro de energía y capacitación mediante Chart.js.
+   - Menú lateral (Sidebar) con botón para mostrar/ocultar y optimizar el espacio de visualización en el dashboard.
 
-4. **Tabla Completa de Resultados:**
+4. **Tabla de Resultados Interactiva:**
    - Desglosa las respuestas de la Pregunta 1 en columnas individuales: `S.T. Equipo`, `S.T. Internet` y `S.T. Impresora`.
-   - Incorpora un parseador inteligente en `src/lib/utils.ts` que permite interpretar dinámicamente tanto los nuevos registros formateados como los registros históricos anteriores, asegurando la continuidad operativa sin pérdidas.
+   - Incorpora un parseador inteligente en `src/lib/utils.ts` que permite interpretar dinámicamente tanto los nuevos registros formateados como los registros históricos anteriores.
+   - **NUEVO:** Sistema de filtrado de texto en tiempo real para cada columna.
+   - **NUEVO:** Ordenamiento ascendente/descendente al hacer clic en los encabezados.
 
 5. **Exportación Estandarizada a Excel:**
    - Exporta el reporte completo con las columnas de situación técnica separadas y fechas estandarizadas en la zona horaria de la Ciudad de México.
