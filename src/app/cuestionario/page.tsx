@@ -46,8 +46,11 @@ export default function CuestionarioPage() {
           <LogoutButton />
         </div>
         <div style={{ backgroundColor: '#F8F9FA', borderLeft: '4px solid var(--accent-color)', padding: '1rem', marginBottom: '2rem', borderRadius: '4px' }}>
+          <p style={{ margin: 0, fontWeight: 500, marginBottom: '0.8rem' }}>
+            Dr. y/o Enfermera, buenos días/ tardes, le habla (Gabriela, Marisol, Jimena, Alex) del equipo de despliegue de ECSUS.
+          </p>
           <p style={{ margin: 0, fontWeight: 500 }}>
-            Agradecemos su atención para esta llamada, formamos parte del equipo de despliegue de ECSUS. El objetivo de esta llamada es ver si podemos apoyarle en algún tema, ya que vemos que la productividad de esta Unidad está por debajo del promedio que se manejaba SISPA.
+            Agradecemos su atención para esta llamada. El objetivo de la misma es ver si podemos apoyarle en algún tema, ya que vemos que la productividad de esta Unidad está por debajo del promedio que se manejaba en SISPA.
           </p>
         </div>
         
